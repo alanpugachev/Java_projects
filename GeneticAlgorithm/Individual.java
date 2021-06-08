@@ -32,6 +32,42 @@ public class Individual {
         return fitness;
     }
 
+    public int getGENESAMOUNT() {
+        return GENESAMOUNT;
+    }
+
+    public int getGENELENGTH() {
+        return GENELENGTH;
+    }
+
+    public String[] getGenes() {
+        return genes;
+    }
+
+    public String getGene(int i) {
+        return this.genes[i];
+    }
+
+    public void setGenes(String[] genes) {
+        this.genes = genes;
+    }
+
+    public void setGene(String gene, int i) {
+        this.genes[i] = gene;
+    }
+
+    public String[] getFit() {
+        return fit;
+    }
+
+    public void setFit(String[] fit) {
+        this.fit = fit;
+    }
+
+    public void setFitness(int fitness) {
+        this.fitness = fitness;
+    }
+
     @Override
     public String toString() {
         return "Individual{" +

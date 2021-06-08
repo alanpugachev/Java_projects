@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 
 public class Population {
     private final int POPULATIONSIZE = 10;
@@ -37,22 +38,43 @@ public class Population {
         return individuals[maxFit2];
     }
 
-    public int getLeastFittestIndex() {
-        int minFitVal = Integer.MAX_VALUE, minFitIndex = 0;
-        for (int i = 0; i < individuals.length; i++) {
-            if (minFitVal >= individuals[i].getFitness()) {
-                minFitVal = individuals[i].getFitness();
-                minFitIndex = i;
-            }
-        }
-        return minFitIndex;
-    }
-
     public void calculateFitness() {
         for (int i = 0; i < individuals.length; i++) {
             individuals[i].calculateFitness();
         }
         getFittest();
+    }
+
+    public Individual randomSelection() {
+        Random random = new Random();
+        int randomIndex = random.nextInt(9);
+        return individuals[randomIndex];
+    }
+
+    public Individual onePointCrossover(Individual father, Individual mother) {
+        Individual son = new Individual();
+        String[] sonsGenes = new String[son.getGENESAMOUNT()];
+        Random random = new Random();
+
+        for(int i = 0; i < son.getGENESAMOUNT(); i++){
+            int randomCrossoverPoint = random.nextInt(10) + 1;
+            if(randomCrossoverPoint == (son.getGENESAMOUNT() - 1)){
+                --randomCrossoverPoint;
+            }
+            else if (randomCrossoverPoint == 0){
+                ++randomCrossoverPoint;
+            }
+
+            String fatherGene = new String(father.getGene(i));
+            String motherGene = new String(mother.getGene(i));
+
+            String sonsGene = new String();
+            sonsGene = String.join("", fatherGene.substring(0, randomCrossoverPoint), motherGene.substring(randomCrossoverPoint, mother.getGENELENGTH()));
+
+            son.setGene(sonsGene, i);
+        }
+
+        return son;
     }
 
     @Override
