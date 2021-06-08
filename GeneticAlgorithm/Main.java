@@ -5,6 +5,6 @@ public class Main {
         System.out.println(p.getFittest());
         System.out.println(p.getSecondFittest());
 
-        System.out.println(p.onePointCrossover(p.getFittest(), p.getSecondFittest()));
+        System.out.println(p.multiplePointsCrossover(p.getFittest(), p.getSecondFittest()));
     }
 }

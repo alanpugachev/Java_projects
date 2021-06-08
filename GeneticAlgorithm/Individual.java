@@ -71,10 +71,7 @@ public class Individual {
     @Override
     public String toString() {
         return "Individual{" +
-                "GENESAMOUNT=" + GENESAMOUNT +
-                ", GENELENGTH=" + GENELENGTH +
-                ", genes=" + Arrays.toString(genes) +
-                ", fit=" + Arrays.toString(fit) +
+                "genes=" + Arrays.toString(genes) +
                 ", fitness=" + fitness +
                 '}';
     }
