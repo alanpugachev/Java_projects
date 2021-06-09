@@ -56,6 +56,10 @@ public class Population {
         getFittest();
     }
 
+    public Individual[] getIndividuals() {
+        return individuals;
+    }
+
     @Override
     public String toString() {
         return "Population{" +

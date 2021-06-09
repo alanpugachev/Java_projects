@@ -1,8 +1,8 @@
 import java.util.Random;
 
 public class SimpleGA {
-    private Individual firstChild;
-    private Individual secondChild;
+    private Individual firstChild = new Individual();
+    private Individual secondChild = new Individual();
 
     public void onePointCrossover(Individual father, Individual mother) {
         Random random = new Random();
@@ -24,24 +24,21 @@ public class SimpleGA {
 
             String secondGene = new String();
             secondGene = String.join("", motherGene.substring(0, randomCrossoverPoint), fatherGene.substring(randomCrossoverPoint, mother.getGENELENGTH()));
-            secondChild.setGene(firstGene, i);
+            secondChild.setGene(secondGene, i);
         }
     }
 
     public void twoPointsCrossover(Individual father, Individual mother) {
         Random random = new Random();
-        for(int i = 0; i < father.getGENELENGTH(); i++) {
+        for(int i = 0; i < father.getGENESAMOUNT(); i++) {
             int firstPoint = random.nextInt(father.getGENELENGTH() - 2) + 2, secondPoint = random.nextInt(mother.getGENELENGTH()) + 2;
-            if(firstPoint == secondPoint){
-                if(secondPoint + 1 == 12){
-                    secondPoint--;
-                }
-                else if(secondPoint - 1 < 0){
-                    secondPoint++;
-                }
-                else{
-                    secondPoint++;
-                }
+
+            if(secondPoint + 1 >= 11){
+                secondPoint--;
+            }
+
+            if(secondPoint - 1 <= 0){
+                secondPoint++;
             }
 
             if(firstPoint > secondPoint) {
@@ -90,8 +87,6 @@ public class SimpleGA {
             secondChild.setGene(secondGene, i);
         }
     }
-
-
 
     public Individual getFirstChild() {
         return firstChild;
