@@ -3,68 +3,46 @@ import java.util.Random;
 
 public class Population {
     private final int POPULATIONSIZE = 10;
-    public Individual[] individuals = new Individual[POPULATIONSIZE];
+    private Microorganism[] microorganisms = new Microorganism[POPULATIONSIZE];
     private int fittest = 0;
 
-    public Population(Individual[] individuals){
-        this.individuals = individuals;
-    }
 
-    public Population(){
-        for(int i = 0; i < individuals.length; i++){
-            individuals[i] = new Individual();
+    public Population() {
+        for(int i = 0; i < microorganisms.length; i++) {
+            microorganisms[i] = new Microorganism();
         }
+        calculateFitness();
     }
 
-    public Individual randomSelection() {
-        Random random = new Random();
-        int randomIndex = random.nextInt(9);
-
-        return individuals[randomIndex];
+    public Population(Microorganism[] microorganisms) {
+        this.microorganisms = microorganisms;
+        calculateFitness();
     }
 
-    public Individual getFittest() {
+
+    public Microorganism getFittest() {
         int maxFit = Integer.MIN_VALUE, maxFitIndex = 0;
-        for (int i = 0; i < individuals.length; i++) {
-            if (maxFit <= individuals[i].getFitness()) {
-                maxFit = individuals[i].getFitness();
+        for (int i = 0; i < microorganisms.length; i++) {
+            if (maxFit <= microorganisms[i].getFitness()) {
+                maxFit = microorganisms[i].getFitness();
                 maxFitIndex = i;
             }
         }
-        fittest = individuals[maxFitIndex].getFitness();
-        return individuals[maxFitIndex];
-    }
-
-    public Individual getSecondFittest() {
-        int maxFit1 = 0, maxFit2 = 0;
-        for (int i = 0; i < individuals.length; i++) {
-            if (individuals[i].getFitness() > individuals[maxFit1].getFitness()) {
-                maxFit2 = maxFit1;
-                maxFit1 = i;
-            }
-            else if (individuals[i].getFitness() > individuals[maxFit2].getFitness()) {
-                maxFit2 = i;
-            }
-        }
-        return individuals[maxFit2];
+        fittest = microorganisms[maxFitIndex].getFitness();
+        return microorganisms[maxFitIndex];
     }
 
     public void calculateFitness() {
-        for (int i = 0; i < individuals.length; i++) {
-            individuals[i].calculateFitness();
+        for (int i = 0; i < microorganisms.length; i++) {
+            microorganisms[i].calculateFitness();
         }
         getFittest();
-    }
-
-    public Individual[] getIndividuals() {
-        return individuals;
     }
 
     @Override
     public String toString() {
         return "Population{" +
-                "POPULATIONSIZE=" + POPULATIONSIZE +
-                ", individuals=" + Arrays.toString(individuals) +
+                "Microorganisms=" + Arrays.toString(microorganisms) +
                 ", fittest=" + fittest +
                 '}';
     }
