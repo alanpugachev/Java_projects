@@ -42,9 +42,9 @@ public class Population {
 
     @Override
     public String toString() {
-        return "Population{" +
-                "Microorganisms=" + Arrays.toString(microorganisms) +
+        return "Population { " +
+                "Microorganisms = \n" + Arrays.toString(microorganisms) +
                 ", fittest=" + fittest +
-                '}';
+                "}";
     }
 }
