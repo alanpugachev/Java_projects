@@ -4,7 +4,7 @@ import java.util.Random;
 public class Microorganism {
     private final int GENESAMOUNT = 5;
     private final int GENELENGTH  = 10;
-    private int fitness = 0;
+    private double fitness = 0;
     private String[] genes = new String[5];
     private String[] fit = new String[]{"0000001100", "0000001110", "0000101100", "0010101110", "1000001100"};
 
@@ -27,11 +27,22 @@ public class Microorganism {
             if (genes[i].equals(fit[i])) {
                 ++fitness;
             }
+            else {
+                String geneTempByteCodeString = genes[i];
+                int geneTempByteCodeToInt = Integer.parseInt(geneTempByteCodeString, 2);
+
+                String fitTempByteCodeString = fit[i];
+                int fitTempByteCodeToInt = Integer.parseInt(fitTempByteCodeString, 2);
+
+                double tempFitness = (double)(1.0 / Math.abs(fitTempByteCodeToInt - geneTempByteCodeToInt) * 100);
+                fitness += tempFitness;
+                System.out.println(tempFitness);
+            }
         }
     }
 
 
-    public int getFitness() {
+    public double getFitness() {
         return fitness;
     }
 
@@ -58,7 +69,7 @@ public class Microorganism {
 
     @Override
     public String toString() {
-        return "Individual{" +
+        return "Microorganism{" +
                 "genes=" + Arrays.toString(genes) +
                 ", fitness=" + fitness +
                 '}';
