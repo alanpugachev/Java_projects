@@ -33,6 +33,27 @@ public class Population {
         return microorganisms[maxFitIndex];
     }
 
+    public Microorganism getSecondFittest() {
+        int maxFit1 = 0, maxFit2 = 0;
+        for (int i = 0; i < microorganisms.length; i++) {
+            if (microorganisms[i].getFitness() > microorganisms[maxFit1].getFitness()) {
+                maxFit2 = maxFit1;
+                maxFit1 = i;
+            }
+            else if (microorganisms[i].getFitness() > microorganisms[maxFit2].getFitness()) {
+                maxFit2 = i;
+            }
+        }
+        return microorganisms[maxFit2];
+    }
+
+    public Microorganism randomSelection() {
+        Random random = new Random();
+        int randomIndex = random.nextInt(9);
+
+        return microorganisms[randomIndex];
+    }
+
     public void calculateFitness() {
         for (int i = 0; i < microorganisms.length; i++) {
             microorganisms[i].calculateFitness();

@@ -54,6 +54,10 @@ public class Microorganism {
         return GENELENGTH;
     }
 
+    public String getGene(int i) {
+        return genes[i];
+    }
+
     public String[] getGenes() {
         return genes;
     }
