@@ -22,6 +22,35 @@ public class Microorganism {
         calculateFitness();
     }
 
+    public Microorganism(int strategy) { //shotgun strategy
+        if(strategy == 0) {
+            for(int i = 0; i < GENESAMOUNT; i++) {
+                Random rand = new Random();
+                int randomGene = rand.nextInt(999) + 1; //max gene length = 10 => 1023 is max value => range = ~1000
+                genes[i] = Integer.toBinaryString(randomGene); //generate random int in binary system
+
+                while (genes[i].length() < GENELENGTH) {
+                    genes[i] = "0" + genes[i];
+                }
+            }
+        }
+        if(strategy == 1) {
+            for(int i = 0; i < GENESAMOUNT; i++) {
+                Random rand = new Random();
+                int offset = rand.nextInt(10) + 1;
+                int offsetedGene = Integer.parseInt(fit[i], 2);
+                offsetedGene -= 10; offsetedGene += offset;
+                genes[i] = Integer.toBinaryString(offsetedGene);
+
+                while (genes[i].length() < GENELENGTH) {
+                    genes[i] = "0" + genes[i];
+                }
+            }
+        }
+        calculateFitness();
+    }
+
+
     public void calculateFitness() {
         for (int i = 0; i < GENESAMOUNT; i++) {
             if (genes[i].equals(fit[i])) {

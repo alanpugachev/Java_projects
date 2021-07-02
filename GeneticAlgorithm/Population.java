@@ -7,9 +7,18 @@ public class Population {
     private double fittest = 0;
 
 
-    public Population() {
-        for(int i = 0; i < microorganisms.length; i++) {
-            microorganisms[i] = new Microorganism();
+    public Population(int choice) {
+        if(choice == 0) {
+            //shotgun strategy
+            for(int i = 0; i < microorganisms.length; i++) {
+                microorganisms[i] = new Microorganism(0);
+            }
+        }
+        if(choice == 1) {
+            //blanket strategy
+            for(int i = 0; i < microorganisms.length; i++) {
+                microorganisms[i] = new Microorganism(1);
+            }
         }
         calculateFitness();
     }
