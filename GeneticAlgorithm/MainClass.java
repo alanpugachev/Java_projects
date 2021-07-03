@@ -4,7 +4,5 @@ public class MainClass {
         System.out.println(p);
 
         GeneticAlgorithm g = new GeneticAlgorithm();
-        g.onePointCrossover(p.getFittest(), p.getSecondFittest());
-        System.out.println(g.getFirstChild() + "\n" + g.getSecondChild());
     }
 }

@@ -22,7 +22,8 @@ public class Microorganism {
         calculateFitness();
     }
 
-    public Microorganism(int strategy) { //shotgun strategy
+    public Microorganism(int strategy) {
+        //shotgun strategy
         if(strategy == 0) {
             for(int i = 0; i < GENESAMOUNT; i++) {
                 Random rand = new Random();
@@ -34,6 +35,7 @@ public class Microorganism {
                 }
             }
         }
+        //blanket strategy
         if(strategy == 1) {
             for(int i = 0; i < GENESAMOUNT; i++) {
                 Random rand = new Random();

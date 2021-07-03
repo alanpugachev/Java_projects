@@ -62,7 +62,7 @@ public class GeneticAlgorithm {
         secondChild.setGenes(secondGenes);
     }
 
-    public void multiplePointsCrossover(Microorganism father, Microorganism mother) {
+    public void fewPointsCrossover(Microorganism father, Microorganism mother) {
         Random random = new Random();
         int amountOfCrossoverPoints = random.nextInt(father.getGENELENGTH() - 2) + 2;
         String firstGenes[] = new String[father.getGENESAMOUNT()];
