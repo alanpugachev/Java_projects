@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="751b9e1f-9494-48b0-b40f-4d7893ebf95c" name="Default Changelist" comment="Change some methods">
+    <list default="true" id="751b9e1f-9494-48b0-b40f-4d7893ebf95c" name="Default Changelist" comment="Repair some methods">
+      <change afterPath="$PROJECT_DIR$/../GeneticAlgorithm1.1/GeneticAlgorithm1.1.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GeneticAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/GeneticAlgorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeneticAlgorithm.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/MainClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Microorganism.java" beforeDir="false" afterPath="$PROJECT_DIR$/Microorganism.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Population.java" beforeDir="false" afterPath="$PROJECT_DIR$/Population.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Population.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GeneticAlgorithm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GeneticAlgorithm/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GeneticAlgorithm/GeneticAlgorithm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GeneticAlgorithm/GeneticAlgorithm.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GeneticAlgorithm/MainClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GeneticAlgorithm/MainClass.class" afterDir="false" />
@@ -38,6 +39,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -47,6 +49,19 @@
     <configuration name="MainClass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MainClass" />
       <module name="GeneticAlgorithm" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -72,7 +87,9 @@
       <workItem from="1625301230207" duration="1408000" />
       <workItem from="1625318459386" duration="5487000" />
       <workItem from="1625404176727" duration="6051000" />
-      <workItem from="1625417182474" duration="461000" />
+      <workItem from="1625417182474" duration="1201000" />
+      <workItem from="1625487835612" duration="15476000" />
+      <workItem from="1625503616324" duration="983000" />
     </task>
     <task id="LOCAL-00001" summary="Change some methods">
       <created>1625318581006</created>
@@ -81,7 +98,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625318581006</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Repair some methods">
+      <created>1625487944150</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1625487944150</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,6 +125,17 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Change some methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change some methods" />
+    <MESSAGE value="Repair some methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="Repair some methods" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NumberFormatException" package="java.lang" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
