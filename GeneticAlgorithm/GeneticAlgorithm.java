@@ -1,40 +1,115 @@
+import java.util.Arrays;
 import java.util.Random;
 
 public class GeneticAlgorithm {
-    private Microorganism firstChild = new Microorganism();
-    private Microorganism secondChild = new Microorganism();
+    private Population p = new Population();
+    private Microorganism father, mother;
 
-    public void onePointCrossover(Microorganism father, Microorganism mother) {
+    public void crossover(Microorganism father, Microorganism mother) {
         Random random = new Random();
-        String firstGenes[] = new String[firstChild.getGENESAMOUNT()];
-        String secondGenes[] = new String[firstChild.getGENESAMOUNT()];
+        int crossover = random.nextInt(100);
 
-        for(int i = 0; i < firstChild.getGENESAMOUNT(); i++){
-            int randomCrossoverPoint = random.nextInt(firstChild.getGENELENGTH());
-            if(randomCrossoverPoint == (firstChild.getGENESAMOUNT() - 1)){
+        if(crossover >= 1 && crossover <= 33){
+            onePointCrossover(father, mother);
+        }
+        if(crossover >= 34 && crossover <= 66){
+            twoPointsCrossover(father, mother);
+        }
+        if(crossover >= 67 && crossover <= 100 ){
+            fewPointsCrossover(father, mother);
+        }
+    }
+
+    public void mutation(Microorganism father, Microorganism mother) {
+        Random random = new Random();
+        int mutationKind = random.nextInt(2);
+
+        switch (mutationKind){
+            case 0: //inversion
+                int parentMutationChoose = random.nextInt(2);
+
+                switch (parentMutationChoose){
+                    case 0:
+                        int gene = random.nextInt(father.getGENESAMOUNT());
+                        int mutationPoint = random.nextInt(father.getGENELENGTH());
+
+                        String tempGene = father.getGene(gene).substring(mutationPoint);
+                        if(tempGene.equals("1")){
+                            tempGene = "0";
+                        }
+                        else{
+                            tempGene = "1";
+                        }
+
+                        father.setGene(father.getGene(gene).substring(0, mutationPoint) + tempGene
+                                + father.getGene(gene).substring(mutationPoint + 1, father.getGENELENGTH()), gene);
+                        break;
+                    case 1:
+                        int gene1 = random.nextInt(mother.getGENESAMOUNT());
+                        int mutationPoint1 = random.nextInt(mother.getGENELENGTH());
+
+                        String tempGene1 = mother.getGene(gene1).substring(mutationPoint1);
+                        if(tempGene1.equals("1")){
+                            tempGene1 = "0";
+                        }
+                        else{
+                            tempGene1 = "1";
+                        }
+
+                        mother.setGene(mother.getGene(gene1).substring(0, mutationPoint1) + tempGene1
+                                + mother.getGene(gene1).substring(mutationPoint1 + 1, mother.getGENELENGTH()), gene1);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 1: //exchange
+                int mutationPoint = random.nextInt(father.getGENELENGTH() - 1);
+                int gene = random.nextInt(mother.getGENESAMOUNT() - 1);
+
+                String temp1 = father.getGene(gene).substring(mutationPoint);
+                String temp2 = mother.getGene(gene).substring(mutationPoint);
+
+                father.setGene(father.getGene(mutationPoint) + temp2 + father.getGene(mutationPoint + 1), gene);
+                mother.setGene(mother.getGene(mutationPoint) + temp1 + mother.getGene(mutationPoint + 1), gene);
+                break;
+            default:
+                break;
+        }
+
+        offspring(father, mother);
+    }
+
+    private void onePointCrossover(Microorganism father, Microorganism mother) {
+        Random random = new Random();
+        String fatherGenes[] = new String[father.getGENESAMOUNT()];
+        String motherGenes[] = new String[mother.getGENESAMOUNT()];
+
+        for(int j = 0; j < father.getGENESAMOUNT(); j++){
+            int randomCrossoverPoint = random.nextInt(father.getGENELENGTH());
+            if(randomCrossoverPoint == (father.getGENESAMOUNT() - 1)){
                 --randomCrossoverPoint;
             }
             else if (randomCrossoverPoint == 0){
                 ++randomCrossoverPoint;
             }
 
-            String fatherGene = new String(father.getGene(i));
-            String motherGene = new String(mother.getGene(i));
+            String fatherGene = new String(father.getGene(j));
+            String motherGene = new String(mother.getGene(j));
 
-            firstGenes[i] = String.join("", fatherGene.substring(0, randomCrossoverPoint), motherGene.substring(randomCrossoverPoint, mother.getGENELENGTH()));
-            secondGenes[i] = String.join("", motherGene.substring(0, randomCrossoverPoint), fatherGene.substring(randomCrossoverPoint, mother.getGENELENGTH()));
+            fatherGenes[j] = String.join("", fatherGene.substring(0, randomCrossoverPoint), motherGene.substring(randomCrossoverPoint, mother.getGENELENGTH()));
+            motherGenes[j] = String.join("", motherGene.substring(0, randomCrossoverPoint), fatherGene.substring(randomCrossoverPoint, father.getGENELENGTH()));
         }
-
-        firstChild.setGenes(firstGenes);
-        secondChild.setGenes(secondGenes);
+        father.setGenes(fatherGenes);
+        mother.setGenes(motherGenes);
     }
 
-    public void twoPointsCrossover(Microorganism father, Microorganism mother) {
+    private void twoPointsCrossover(Microorganism father, Microorganism mother) {
         Random random = new Random();
-        String firstGenes[] = new String[father.getGENESAMOUNT()];
-        String secondGenes[] = new String[father.getGENESAMOUNT()];
+        String fatherGenes[] = new String[father.getGENESAMOUNT()];
+        String motherGenes[] = new String[mother.getGENESAMOUNT()];
 
-        for(int i = 0; i < father.getGENESAMOUNT(); i++) {
+        for(int j = 0; j < father.getGENESAMOUNT(); j++) {
             int firstPoint = random.nextInt(father.getGENELENGTH() - 2) + 2, secondPoint = random.nextInt(mother.getGENELENGTH()) + 2;
 
             if(secondPoint + 1 >= father.getGENELENGTH() - 1){
@@ -51,60 +126,90 @@ public class GeneticAlgorithm {
                 secondPoint = temp;
             }
 
-            String fatherGene = new String(father.getGene(i));
-            String motherGene = new String(mother.getGene(i));
+            String fatherGene = new String(father.getGene(j));
+            String motherGene = new String(mother.getGene(j));
 
-            firstGenes[i] = fatherGene.substring(0, firstPoint) + motherGene.substring(firstPoint, secondPoint) + fatherGene.substring(secondPoint, father.getGENELENGTH() - 1);
-            secondGenes[i] = motherGene.substring(0, firstPoint) + fatherGene.substring(firstPoint, secondPoint) + motherGene.substring(secondPoint, father.getGENELENGTH() - 1);
+            fatherGenes[j] = motherGene.substring(0, firstPoint) + fatherGene.substring(firstPoint, secondPoint) + motherGene.substring(secondPoint, father.getGENELENGTH() - 1);
+            motherGenes[j] = fatherGene.substring(0, firstPoint) + motherGene.substring(firstPoint, secondPoint) + fatherGene.substring(secondPoint, father.getGENELENGTH() - 1);
         }
-
-        firstChild.setGenes(firstGenes);
-        secondChild.setGenes(secondGenes);
+        father.setGenes(fatherGenes);
+        mother.setGenes(motherGenes);
     }
 
-    public void fewPointsCrossover(Microorganism father, Microorganism mother) {
+    private void fewPointsCrossover(Microorganism father, Microorganism mother) {
         Random random = new Random();
         int amountOfCrossoverPoints = random.nextInt(father.getGENELENGTH() - 2) + 2;
-        String firstGenes[] = new String[father.getGENESAMOUNT()];
-        String secondGenes[] = new String[father.getGENESAMOUNT()];
+        String fatherGenes[] = new String[father.getGENESAMOUNT()];
+        String motherGenes[] = new String[mother.getGENESAMOUNT()];
 
-        for(int i = 0; i < father.getGENESAMOUNT(); i++){
-            String fatherGene = new String(father.getGene(i));
-            String motherGene = new String(mother.getGene(i));
+        for(int j = 0; j < father.getGENESAMOUNT(); j++){
+            String fatherGene = new String(father.getGene(j));
+            String motherGene = new String(mother.getGene(j));
             int amountOfGenes = father.getGENELENGTH() / amountOfCrossoverPoints;
-            int j = 0;
+            int k = 0;
 
-            while(j < father.getGENELENGTH()){
-                if(j % 2 == 0){
-                    firstGenes[i] += fatherGene.substring(j, j + amountOfGenes);
-                    secondGenes[i] += motherGene.substring(j, j + amountOfGenes);
+            while(k < father.getGENELENGTH()){
+                if(k % 2 == 0){
+                    motherGenes[j] += fatherGene.substring(k, k + amountOfGenes);
                 }
                 else{
-                    firstGenes[i] += motherGene.substring(j, j + amountOfGenes);
-                    secondGenes[i] += fatherGene.substring(j, j + amountOfGenes);
+                    fatherGenes[j] += motherGene.substring(k, k + amountOfGenes);
                 }
-                j+=amountOfGenes;
+                k+=amountOfGenes;
             }
         }
-
-        firstChild.setGenes(firstGenes);
-        secondChild.setGenes(secondGenes);
+        father.setGenes(fatherGenes);
+        mother.setGenes(motherGenes);
     }
 
-
-    public Microorganism getFirstChild() {
-        return firstChild;
+    public void offspring(Microorganism father, Microorganism mother) {
+        Microorganism[] m = new Microorganism[p.getPOPULATIONSIZE()];
+        for (int i = 0; i < p.getPOPULATIONSIZE(); i++){
+            m[i] = new Microorganism(1);
+            for (int j = 0; j < father.getGENESAMOUNT(); j++){
+                Random random = new Random();
+                int parentGene = random.nextInt(2);
+                switch (parentGene){
+                    case 0:
+                        m[i].setGene(father.getGene(j), j);
+                        break;
+                    case 1:
+                        m[i].setGene(mother.getGene(j), j);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            m[i].calculateFitness();
+        }
+        p.setMicroorganisms(m);
+        p.calculateFitness();
     }
 
-    public Microorganism getSecondChild() {
-        return secondChild;
+    public void setFather(Microorganism father) {
+        this.father = father;
+    }
+
+    public void setMother(Microorganism mother) {
+        this.mother = mother;
+    }
+
+    public Population getPopulation() {
+        return p;
+    }
+
+    public Microorganism getFather() {
+        return father;
+    }
+
+    public Microorganism getMother() {
+        return mother;
     }
 
     @Override
     public String toString() {
         return "GeneticAlgorithm{" +
-                "firstChild=" + firstChild +
-                ", secondChild=" + secondChild +
+                "p=" + p +
                 '}';
     }
 }

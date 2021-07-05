@@ -6,6 +6,10 @@ public class Population {
     private Microorganism[] microorganisms = new Microorganism[POPULATIONSIZE];
     private double fittest = 0;
 
+    public Population(){
+
+    }
+
 
     public Population(int choice) {
         if(choice == 0) {
@@ -68,6 +72,18 @@ public class Population {
             microorganisms[i].calculateFitness();
         }
         getFittest();
+    }
+
+    public int getPOPULATIONSIZE() {
+        return POPULATIONSIZE;
+    }
+
+    public Microorganism[] getMicroorganisms() {
+        return microorganisms;
+    }
+
+    public void setMicroorganisms(Microorganism[] microorganisms) {
+        this.microorganisms = microorganisms;
     }
 
     @Override

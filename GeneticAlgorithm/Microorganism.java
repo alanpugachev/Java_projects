@@ -8,18 +8,12 @@ public class Microorganism {
     private String[] genes = new String[5]; //array for generated genes
     private String[] fit = new String[]{"1100", "1110", "101100", "10101110", "1000001100"}; //max of 2x^4 + 12 on [0, 1, 2, 3, 4]
 
-
-    public Microorganism(){
+    public Microorganism() {
         for(int i = 0; i < GENESAMOUNT; i++) {
-            Random rand = new Random();
-            int randomGene = rand.nextInt(999) + 1; //max gene length = 10 => 1023 is max value => range = ~1000
-            genes[i] = Integer.toBinaryString(randomGene); //generate random int in binary system
-
             while (genes[i].length() < GENELENGTH) {
                 genes[i] = "0" + genes[i];
             }
         }
-        calculateFitness();
     }
 
     public Microorganism(int strategy) {
@@ -67,7 +61,6 @@ public class Microorganism {
 
                 double tempFitness = (double)(1.0 / Math.abs(fitTempByteCodeToInt - geneTempByteCodeToInt));
                 fitness += tempFitness;
-                //System.out.println(i + "-gene fitness = " + tempFitness);
             }
         }
     }
@@ -102,6 +95,10 @@ public class Microorganism {
     //made for replace genes because this class hasn't constructor with arguments
     public void setGenes(String[] genes) {
         this.genes = genes;
+    }
+
+    public void setGene(String gene, int i) {
+        genes[i] = gene;
     }
 
     @Override
